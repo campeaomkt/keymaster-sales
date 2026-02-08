@@ -4,7 +4,7 @@ import React from 'react';
 const Pricing: React.FC = () => {
   const handlePurchase = () => {
     // Lead directly to checkout link
-    window.location.href = "https://pay.hotmart.com/YOUR_LINK";
+    window.location.href = "https://pay.hotmart.com/L104341085V?checkoutMode=10&amp;bid=1770582806653&amp;hideBillet=1";
   };
 
   return (
