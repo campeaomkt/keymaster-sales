@@ -1,7 +1,21 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Hero: React.FC = () => {
+  useEffect(() => {
+    // Inject Vturb player script
+    const s = document.createElement("script");
+    s.src = "https://scripts.converteai.net/1b23d824-f7d5-46ac-8edc-700038ffb33d/players/6988e8652a1ff25848748983/v4/player.js";
+    s.async = true;
+    document.head.appendChild(s);
+    
+    return () => {
+      if (document.head.contains(s)) {
+        document.head.removeChild(s);
+      }
+    };
+  }, []);
+
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById('pricing');
@@ -75,7 +89,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Video Column (Right) - Vimeo Embed */}
+          {/* Video Column (Right) - Vturb Smartplayer */}
           <div className="flex justify-center lg:justify-center">
             <div className="hero-video relative group w-full max-w-[280px] md:max-w-[320px] aspect-[9/16]">
               {/* Outer Glow */}
@@ -87,16 +101,13 @@ const Hero: React.FC = () => {
                 {/* Speaker Grill Mockup */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-800 rounded-b-2xl z-30"></div>
 
-                {/* Vimeo Iframe Embed */}
-                <iframe 
-                  className="w-full h-full relative z-10"
-                  src="https://player.vimeo.com/video/1162876846?badge=0&autopause=0&player_id=0&app_id=58479" 
-                  title="CRIATIVO 21 AEVO PRO"
-                  frameBorder="0" 
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
+                {/* Vturb Player Integration */}
+                <div 
+                  className="w-full h-full relative z-10 bg-black flex items-center justify-center"
+                  dangerouslySetInnerHTML={{ 
+                    __html: '<vturb-smartplayer id="vid-6988e8652a1ff25848748983" style="display: block; margin: 0 auto; width: 100%; height: 100%; object-fit: cover;"></vturb-smartplayer>' 
+                  }}
+                />
 
                 {/* Decorative Label */}
                 <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
